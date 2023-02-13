@@ -30,7 +30,7 @@ class Gmx:
         btn = self.browser.driver.find_element(By.XPATH, '//button[contains(@class,"Exchange-swap-button")]')
         if 'Approve' in btn.text:
             btn.click()
-            self.metamask.confirm_token_approval(0.1)
+            self.metamask.confirm_token_approval(float(amount) * 5)
         
         self.browser.driver.find_element(By.XPATH, '//button[contains(@class,"Exchange-swap-button")]').click()
         sleep(7)

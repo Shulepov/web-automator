@@ -41,7 +41,7 @@ class Uniswap:
         sleep(2)
         self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
         sleep(10)
-        #self.metamask.confirm_transaction()
+        self.metamask.confirm_transaction()
 
     def wrap_eth(self, weth_addr, amount):
         prev_window = self.browser.get_current_window_handle()

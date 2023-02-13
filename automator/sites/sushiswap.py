@@ -21,6 +21,11 @@ class Sushiswap:
         url += "&exactAmount=" + amount
         self.browser.go_to(url)
         sleep(10)
+        try:
+             self.browser.driver.find_element(By.XPATH, '//button[contains(text(),"Approve")]').click()
+             self.metamask.confirm_token_approval(float(amount) * 5)
+        except:
+            print("Looks like token already approved")
         self.browser.driver.find_element(By.ID, 'swap-button').click()
         sleep(5)
         self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
