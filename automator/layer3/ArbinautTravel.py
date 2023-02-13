@@ -31,7 +31,7 @@ def run(browser, metamask):
 	do_sushi(layer3_window, browser, metamask)
 
 	sleep(10)
-	complete()
+	complete(browser, layer3_window)
 
 	
 

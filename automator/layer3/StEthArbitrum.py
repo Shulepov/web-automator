@@ -35,4 +35,4 @@ def run(browser, metamask):
 	quiz(browser, metamask)
 	balancer_trade(layer3_window, browser, metamask)
 	balancer_pool(layer3_window, browser, metamask)
-	complete()
+	complete(browser, layer3_window)

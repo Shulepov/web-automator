@@ -59,6 +59,6 @@ def run(browser, metamask):
 	liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
 
 	sleep(10)
-	complete()
+	complete(browser, layer3_window)
 
 
