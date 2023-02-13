@@ -26,13 +26,22 @@ class Uniswap:
 			print("Looks like wallet already connected to uniswap")
 
 	def execute_swap(self, amount):
+		#setup slippage
+		settings_btn = self.browser.driver.find_element(By.ID, 'open-settings-dialog-button')
+		settings_btn.click()
+		settings = self.browser.driver.find_element(By.XPATH, '//div[div[text()="Settings"]]')
+		sleep(1)
+		settings.find_element(By.XPATH, './/input').send_keys(1)
+		sleep(1)
+		settings_btn.click()
+
 		self.browser.type(amount, classname="token-amount-input")
 		sleep(7)
 		self.browser.driver.find_element(By.ID, 'swap-button').click()
 		sleep(2)
 		self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
 		sleep(10)
-		self.metamask.confirm_transaction()
+		#self.metamask.confirm_transaction()
 
 	def wrap_eth(self, weth_addr, amount):
 		prev_window = self.browser.get_current_window_handle()
