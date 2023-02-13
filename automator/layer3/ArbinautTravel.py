@@ -1,24 +1,15 @@
 from time import sleep
 from automator.sites import Sushiswap
+from automator.sites import Gmx
 from automator import Network
 from .helpers import *
 
 def do_gmx(layer3_window, browser, metamask):
 	browser.new_tab("https://app.gmx.io/#/buy_glp")
 	sleep(10)
-	try:
-		browser.click(text="Connect Wallet", classname="connect-wallet-btn")
-		sleep(2)
-		browser.click(text="Metamask", classname="MetaMask-btn")
-		metamask.connect_to_website()
-	except:
-		print("Looks like wallet already connected to GMX")
-
-	browser.type("0.0001", classname="Exchange-swap-input")
-	sleep(7)
-	browser.click(classname="Exchange-swap-button")
-	sleep(7)
-	metamask.confirm_transaction()
+	gmx = Gmx(browser, metamask)
+	gmx.try_connect()
+	gmx.buy_glp('0.0001')
 	return_and_verify(browser, layer3_window)
 
 def do_sushi(layer3_window, browser, metamask):
