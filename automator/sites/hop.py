@@ -20,9 +20,9 @@ class Hop:
 	#provide liquidy using token 1 or token 2 ? (first field or second)
 	def provide_liquidity(self, amount, token_idx=1, stake=True):
 		self.browser.type(amount, classname="jss108", number=token_idx)
-		sleep(2)
+		sleep(4)
 		self.browser.driver.find_element(By.XPATH, '//button[span="Preview"]').click()
-		sleep(2)
+		sleep(6)
 		dep_btn = self.browser.driver.find_element(By.XPATH, '//button[span="Deposit"]')
 		dep_and_stake_btn = self.browser.driver.find_element(By.XPATH, '//button[span="Deposit + Stake"]')
 		provide_dtn = dep_and_stake_btn if stake else dep_btn
