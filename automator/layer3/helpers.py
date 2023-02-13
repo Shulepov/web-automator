@@ -1,6 +1,7 @@
 from time import sleep
 from automator import Alchemy, network_to_alchemy_network
 from automator.sites import Uniswap
+from selenium.webdriver.common.by import By
 
 def verify(browser, layer3_window):
 	sleep(1)
