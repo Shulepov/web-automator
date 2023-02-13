@@ -23,7 +23,7 @@ class Hop:
 		sleep(4)
 		self.browser.driver.find_element(By.XPATH, '//button[span="Preview"]').click()
 		sleep(6)
-		dep_btn = self.browser.driver.find_element(By.XPATH, '//button[span="Deposit"]')
+		dep_btn = self.browser.driver.find_element(By.XPATH, '//div[contains(@class,"giEcUF")]/button[span="Deposit"]')
 		dep_and_stake_btn = self.browser.driver.find_element(By.XPATH, '//button[span="Deposit + Stake"]')
 		provide_dtn = dep_and_stake_btn if stake else dep_btn
 		provide_dtn.click()
