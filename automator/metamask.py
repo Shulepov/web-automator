@@ -46,8 +46,11 @@ class Metamask:
 		sleep(5)
 		try:
 			self.browser.click("Got it")
+			sleep(1)
 		except:
 			print("")
+		self.get_wallet_address()
+		sleep(1)
 		self.get_back()
 
 	def open_popup(self):

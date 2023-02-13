@@ -41,6 +41,10 @@ def liquidity_on_balancer(layer3_window, browser, metamask):
 	return_and_verify(browser, layer3_window)
 	verify(browser, layer3_window)
 
+def liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
+	verify(browser, layer3_window)
+	verify(browser, layer3_window)
+
 def run(browser, metamask):
 	browser.go_to("https://beta.layer3.xyz/challenges/arbitrum-all-rounder-ii")
 	sleep(2)
@@ -51,8 +55,9 @@ def run(browser, metamask):
 	swap_on_uniswap_to_gmx(layer3_window, browser, metamask)
 	stake_gmx_on_gmx(layer3_window, browser, metamask)
 	liquidity_on_hop(layer3_window, browser, metamask)
-	liquidity_on_balancer(layer3_window, browser, metamask)
-
+	#liquidity_on_balancer(layer3_window, browser, metamask)
+	liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
+	
 	sleep(10)
 	complete()
 

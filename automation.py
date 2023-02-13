@@ -33,9 +33,7 @@ if __name__ == '__main__':
         #Gm.run(chrome, mmask)
         #ArbinautTravel.run(chrome, mmask)
         #StEthArbitrum.run(chrome, mmask)
-        ArbitrumAllRounder2.run(chrome, mmask)
-        #wallet = mmask.get_wallet_address()
-        #print(wallet)
+        #ArbitrumAllRounder2.run(chrome, mmask)
 
         sleep(30)
         #chrome.driver.quit()
