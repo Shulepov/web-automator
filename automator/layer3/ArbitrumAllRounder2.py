@@ -41,7 +41,7 @@ def liquidity_on_balancer(layer3_window, browser, metamask):
 	return_and_verify(browser, layer3_window)
 	verify(browser, layer3_window)
 
-def liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
+def liquidity_on_balancer_just_complete(layer3_window, browser, metamask):
 	verify(browser, layer3_window)
 	verify(browser, layer3_window)
 
@@ -57,7 +57,7 @@ def run(browser, metamask):
 	liquidity_on_hop(layer3_window, browser, metamask)
 	#liquidity_on_balancer(layer3_window, browser, metamask)
 	liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
-	
+
 	sleep(10)
 	complete()
 
