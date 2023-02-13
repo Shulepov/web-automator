@@ -86,6 +86,16 @@ class Metamask:
 		sleep(5)
 		self.close_popup()
 
+	def has_pending_transactions(self):
+		try:
+			pending = self.driver.find_element(By.XPATH,'//div[contains(@class,"transaction-list__pending-transactions")]')
+			return True
+		except:
+			return False
+
+	def is_last_transaction_confirmed(self):
+		return True
+
 	def confirm_token_approval(self, value=0):
 		sleep(10)
 		self.open_metamask()
@@ -112,9 +122,13 @@ class Metamask:
 				print("No confirm button found")
 		except:
 			print("Not approval window, possibly already was approved")
-		sleep(40)
+		while True:
+			sleep(5)
+			if not self.has_pending_transactions():
+				break
 		self.get_back()
 		sleep(20)
+		return self.is_last_transaction_confirmed()
 
 	def reject_token_approval(self):
 		sleep(5)
@@ -126,9 +140,13 @@ class Metamask:
 		sleep(10)
 		self.open_metamask()
 		self.driver.find_element(By.XPATH, '//button[text()="Confirm"]').click()
-		sleep(40)
+		while True:
+			sleep(5)
+			if not self.has_pending_transactions():
+				break
 		self.get_back()
 		sleep(20)
+		return self.is_last_transaction_confirmed()
 
 	def reject_transaction(self):
 		sleep(5)
