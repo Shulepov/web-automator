@@ -58,7 +58,6 @@ class Alchemy:
 	    		tokens
 	    	]
 		}
-
 		headers = {
 	    	"accept": "application/json",
 	    	"content-type": "application/json"

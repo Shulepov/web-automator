@@ -34,6 +34,8 @@ class Balancer:
 			sleep(2)
 			token_search.send_keys(Keys.RETURN)
 			sleep(2)
+		if tokens[0] != 'ETH':
+			print("Balancer swap: approval not implemented") #TODO
 		self.browser.driver.find_element(By.XPATH, '//input[@name="tokenIn"]').send_keys(amount)
 		sleep(5)
 		try:
@@ -48,23 +50,29 @@ class Balancer:
 		self.metamask.confirm_transaction()
 
 
-	#ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE
-	def add_liquidity(self, token, amount):
+	ETH = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+	def add_liquidity(self, token, amount, stake=True):
 		self.browser.driver.find_element(By.XPATH, f'//input[@name="{token}"]').send_keys(amount)
 		sleep(2)
 		self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Preview")]').click()
 		sleep(3)
+		if token != Balancer.ETH:
+			print("Balancer liquidity: approval not implemented") #TODO
 		self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Add liquidity")]').click()
 		sleep(5)
 		self.metamask.confirm_transaction()
 
 		#stake
-		self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Stake this to earn extra")]').click()
-		sleep(7)
-		self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Approve")]').click()
-		sleep(5)
-		self.metamask.confirm_token_approval()
-		self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Stake")]').click()
-		sleep(5)
-		self.metamask.confirm_transaction()
+		if stake:
+			self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Stake this to earn extra")]').click()
+			sleep(7)
+			try:
+				self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Approve")]').click()
+				sleep(5)
+				self.metamask.confirm_token_approval()
+			except:
+				print("Balancer: looks like already approved")
+			self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Stake")]').click()
+			sleep(5)
+			self.metamask.confirm_transaction()
 

@@ -8,16 +8,18 @@ class Hop:
 
 	def try_connect(self):
 		try:
-			self.browser.driver.find_element(By.XPATH, 'button[span="Connect a Wallet"]').click()
+			self.browser.driver.find_element(By.XPATH, '//button[span="Connect a Wallet"]').click()
 			sleep(2)
-			self.browser.driver.find_element(By.XPATH, '//button[span="MetaMask"]').click()
+			self.browser.driver.find_element(By.XPATH, '//button[span[text()="MetaMask"]]').click()
+			sleep(10)
 			self.metamask.connect_to_website()
-		except:
+		except Exception as e:
+			print(e)
 			print("Looks like wallet already connected to Hop")
 
 	#provide liquidy using token 1 or token 2 ? (first field or second)
 	def provide_liquidity(self, amount, token_idx=1, stake=True):
-		browser.type(amount, classname="jss108", number=token_idx)
+		self.browser.type(amount, classname="jss108", number=token_idx)
 		sleep(2)
 		self.browser.driver.find_element(By.XPATH, '//button[span="Preview"]').click()
 		sleep(2)
@@ -33,9 +35,10 @@ class Hop:
 			print("")
 		self.metamask.confirm_transaction()
 		sleep(5)
-		try:
-			self.metamask.confirm_token_approval()
-			sleep(5)
-		except:
-			print("")
-		self.metamask.confirm_transaction()
+		if stake:
+			try:
+				self.metamask.confirm_token_approval()
+				sleep(5)
+			except:
+				print("")
+			self.metamask.confirm_transaction()

@@ -21,3 +21,18 @@ class Gmx:
 		self.browser.click(classname="Exchange-swap-button")
 		sleep(7)
 		self.metamask.confirm_transaction()
+
+	def stake_gmx(self, amount):
+		gmx_card = self.browser.driver.find_element(By.XPATH, '//div[@class="StakeV2-content"]//div[contains(@class,"StakeV2-gmx-card")]')
+		gmx_card.find_element(By.XPATH, '//button[text()="Stake"]').click()
+		self.browser.driver.find_element(By.XPATH, '//input[contains(@class,"Exchange-swap-input")]').send_keys(amount)
+
+		btn = self.browser.driver.find_element(By.XPATH, '//button[contains(@class,"Exchange-swap-button")]')
+		if 'Approve' in btn.text:
+			btn.click()
+			self.metamask.confirm_token_approval(0.1)
+		
+		self.browser.driver.find_element(By.XPATH, '//button[contains(@class,"Exchange-swap-button")]').click()
+		sleep(7)
+		self.metamask.confirm_transaction()
+

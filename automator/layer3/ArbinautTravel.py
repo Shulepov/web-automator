@@ -1,7 +1,7 @@
 from time import sleep
 from automator.sites import Sushiswap
 from automator.sites import Gmx
-from automator import Network
+from automator import Arbitrum
 from .helpers import *
 
 def do_gmx(layer3_window, browser, metamask):
@@ -25,7 +25,7 @@ def run(browser, metamask):
 	sleep(2)
 	layer3_window = browser.get_current_window_handle()
 
-	metamask.change_network(Network.ARBITRUM)
+	metamask.change_network(Arbitrum.NetworkName)
 
 	do_gmx(layer3_window, browser, metamask)
 	do_sushi(layer3_window, browser, metamask)

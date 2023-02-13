@@ -4,6 +4,7 @@ from time import sleep
 from .helpers import *
 from .quiz import do_quiz
 from automator.sites import Balancer
+from automator import Arbitrum
 
 def quiz(browser, metamask):
 	do_quiz(browser, [1, 1, 1])
@@ -29,7 +30,7 @@ def run(browser, metamask):
 	sleep(2)
 	layer3_window = browser.get_current_window_handle()
 
-	#metamask.change_network(Network.ARBITRUM)
+	#metamask.change_network(Arbitrum.NetworkName)
 
 	quiz(browser, metamask)
 	balancer_trade(layer3_window, browser, metamask)

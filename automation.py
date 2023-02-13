@@ -30,12 +30,15 @@ if __name__ == '__main__':
         mmask = Metamask(chrome.driver, chrome)
         mmask.login(config['metamask'])
     
-        Gm.run(chrome, mmask)
-        ArbinautTravel.run(chrome, mmask)
+        #Gm.run(chrome, mmask)
+        #ArbinautTravel.run(chrome, mmask)
         #StEthArbitrum.run(chrome, mmask)
+        ArbitrumAllRounder2.run(chrome, mmask)
+        #wallet = mmask.get_wallet_address()
+        #print(wallet)
 
         sleep(30)
-        chrome.driver.quit()
+        #chrome.driver.quit()
 
     while True:
         sleep(100)

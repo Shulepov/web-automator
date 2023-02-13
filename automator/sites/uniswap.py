@@ -8,7 +8,7 @@ class Uniswap:
 
 	def check_warnings(self):
 		try:
-			browser.driver.find_element(By.XPATH, '//button[contains(.,"I understand")]').click()
+			self.browser.driver.find_element(By.XPATH, '//button[text()="I understand"]').click()
 			sleep(2)
 		except:
 			print("There weren't any warnings")
@@ -23,18 +23,31 @@ class Uniswap:
 			self.metamask.connect_to_website()
 			sleep(5)
 		except Exception as e:
-			print(e)
 			print("Looks like wallet already connected to uniswap")
 
 	def execute_swap(self, amount):
-		url = self.browser.get_current_url()
-		url += "&exactAmount=" + amount
-		self.browser.go_to(url)
-		sleep(10)
+		self.browser.type(amount, classname="token-amount-input")
+		sleep(7)
 		self.browser.driver.find_element(By.ID, 'swap-button').click()
 		sleep(2)
 		self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
 		sleep(10)
 		self.metamask.confirm_transaction()
+
+	def wrap_eth(self, weth_addr, amount):
+		prev_window = self.browser.get_current_window_handle()
+		url = f'https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency={weth_addr}'
+		self.browser.new_tab(url)
+		sleep(10)
+		self.try_connect()
+		self.browser.type(amount, classname="token-amount-input")
+		sleep(7)
+		self.browser.driver.find_element(By.XPATH, '//button[text()="Wrap"]').click()
+		sleep(5)
+		self.metamask.confirm_transaction()
+		self.browser.close_current_tab()
+		self.browser.switch_to_window(prev_window)
+		sleep(2)
+
 
 

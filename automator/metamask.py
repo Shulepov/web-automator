@@ -12,6 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from time import sleep
+import tkinter as tk
 
 EXTENSION_ID = 'nkbihfbeogaeaoehlefnkodbefgpgknn'
 	    #		self.driver.execute_script("arguments[0].scrollIntoViewIfNeeded();", network_el);
@@ -22,6 +23,7 @@ class Metamask:
 		self.driver = driver
 		self.window_handle = None
 		self.last_handle = None
+		self.wallet_address = None
 
 	def open_metamask(self):
 		self.last_handle = self.driver.current_window_handle
@@ -65,6 +67,17 @@ class Metamask:
 		self.last_handle = None
 		sleep(1)
 
+	def get_wallet_address(self):
+		if self.wallet_address:
+			return self.wallet_address
+		self.open_metamask()
+		root = tk.Tk()
+		self.driver.find_element(By.XPATH, '//button[@data-testid="selected-account-click"]').click()
+		self.wallet_address = root.clipboard_get()
+		self.get_back()
+		return self.wallet_address
+
+
 	def change_network(self, network_name):
 	    self.open_metamask()
 	    self.driver.find_element(By.XPATH, '//div[@data-testid="network-display"]').click()
@@ -88,7 +101,7 @@ class Metamask:
 
 	def has_pending_transactions(self):
 		try:
-			pending = self.driver.find_element(By.XPATH,'//div[contains(@class,"transaction-list__pending-transactions")]')
+			pending = self.driver.find_element(By.XPATH,'//div[@class="transaction-list__pending-transactions"]//div[text()="Pending"]')
 			return True
 		except:
 			return False
@@ -127,7 +140,7 @@ class Metamask:
 			if not self.has_pending_transactions():
 				break
 		self.get_back()
-		sleep(20)
+		sleep(10)
 		return self.is_last_transaction_confirmed()
 
 	def reject_token_approval(self):
