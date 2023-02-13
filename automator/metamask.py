@@ -57,7 +57,8 @@ class Metamask:
 		except:
 			print("")
 						
-		self.get_wallet_address()
+		address = self.get_wallet_address()
+		print(f'Start metamas: {address}')
 		sleep(1)
 		self.get_back()
 
