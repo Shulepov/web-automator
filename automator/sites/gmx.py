@@ -19,7 +19,6 @@ class Gmx:
         self.browser.type(amount, classname="Exchange-swap-input")
         sleep(7)
         self.browser.click(classname="Exchange-swap-button")
-        sleep(7)
         self.metamask.confirm_transaction()
 
     def stake_gmx(self, amount):
@@ -33,6 +32,5 @@ class Gmx:
             self.metamask.confirm_token_approval(float(amount) * 5)
         
         self.browser.driver.find_element(By.XPATH, '//button[contains(@class,"Exchange-swap-button")]').click()
-        sleep(7)
         self.metamask.confirm_transaction()
 

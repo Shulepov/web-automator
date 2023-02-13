@@ -47,7 +47,6 @@ class Balancer:
         self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Preview")]').click()
         sleep(3)
         self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Confirm swap")]').click()
-        sleep(5)
         self.metamask.confirm_transaction()
 
 
@@ -60,7 +59,6 @@ class Balancer:
         if token != Balancer.ETH:
             print("Balancer liquidity: approval not implemented") #TODO
         self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Add liquidity")]').click()
-        sleep(5)
         self.metamask.confirm_transaction()
 
         #stake
@@ -69,11 +67,9 @@ class Balancer:
             sleep(7)
             try:
                 self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Approve")]').click()
-                sleep(5)
                 self.metamask.confirm_token_approval()
             except:
                 print("Balancer: looks like already approved")
             self.browser.driver.find_element(By.XPATH, '//button[contains(.,"Stake")]').click()
-            sleep(5)
             self.metamask.confirm_transaction()
 
