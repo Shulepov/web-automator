@@ -28,3 +28,20 @@ def wrap_eth_if_needed(browser, metamask, network, weth_addr, amount):
 		uniswap.wrap_eth(weth_addr, amount)
 		sleep(10)
 		browser.driver.refresh()
+
+def is_quest_completed(browser):
+	try:
+		browser.driver.find_element(By.XPATH, '//button[contains(text(),"Completed")]')
+		return True
+	except:
+		return False
+
+def completed_tasks_count(browser):
+	try:
+		#count of elements before not completed task
+		completed = browser.driver.find_elements(By.XPATH, '//div[contains(@class,"c-PJLV-icSBVGD-css")]/preceding-sibling::div')
+		return len(completed)
+	except:
+		#if all completed
+		completed = browser.driver.find_elements(By.XPATH, '//div[contains(@class,"c-PJLV-ibOGAhC-css")]')
+		return len(completed)

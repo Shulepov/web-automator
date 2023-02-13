@@ -47,18 +47,25 @@ def liquidity_on_balancer_just_complete(layer3_window, browser, metamask):
 
 def run(browser, metamask):
 	browser.go_to("https://beta.layer3.xyz/challenges/arbitrum-all-rounder-ii")
-	sleep(2)
+	sleep(5)
 	layer3_window = browser.get_current_window_handle()
+	completed_count = completed_tasks_count(browser)
 
 	#metamask.change_network(Arbitrum.NetworkName)
 
-	swap_on_uniswap_to_gmx(layer3_window, browser, metamask)
-	stake_gmx_on_gmx(layer3_window, browser, metamask)
-	liquidity_on_hop(layer3_window, browser, metamask)
-	#liquidity_on_balancer(layer3_window, browser, metamask)
-	liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
+	if completed_count < 1:
+		swap_on_uniswap_to_gmx(layer3_window, browser, metamask)
+	if completed_count < 2:
+		stake_gmx_on_gmx(layer3_window, browser, metamask)
+	if completed_count < 3:
+		liquidity_on_hop(layer3_window, browser, metamask)
+
+	if completed_count < 4:
+		#liquidity_on_balancer(layer3_window, browser, metamask)
+		liquidity_on_balancer_just_complete(layer3_window, browser, metamask)
 
 	sleep(10)
-	complete(browser, layer3_window)
+	if not is_quest_completed(browser):
+		complete(browser, layer3_window)
 
 

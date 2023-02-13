@@ -22,16 +22,22 @@ def do_sushi(layer3_window, browser, metamask):
 
 def run(browser, metamask):
 	browser.go_to("https://beta.layer3.xyz/challenges/arbinaut-travels-gmx-treasuredao-and-vesta")
-	sleep(2)
+	sleep(5)
 	layer3_window = browser.get_current_window_handle()
+	completed_count = completed_tasks_count(browser)
 
 	metamask.change_network(Arbitrum.NetworkName)
 
-	do_gmx(layer3_window, browser, metamask)
-	do_sushi(layer3_window, browser, metamask)
+
+
+	if completed_count < 1:
+		do_gmx(layer3_window, browser, metamask)
+	if completed_count < 2:
+		do_sushi(layer3_window, browser, metamask)
 
 	sleep(10)
-	complete(browser, layer3_window)
+	if not is_quest_completed(browser):
+		complete(browser, layer3_window)
 
 	
 

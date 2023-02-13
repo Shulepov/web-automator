@@ -26,12 +26,18 @@ def balancer_pool(layer3_window, browser, metamask):
 
 def run(browser, metamask):
 	browser.go_to("https://beta.layer3.xyz/challenges/steth-on-arbitrum")
-	sleep(2)
+	sleep(5)
 	layer3_window = browser.get_current_window_handle()
 
+	completed_count = completed_tasks_count(browser)
 	#metamask.change_network(Arbitrum.NetworkName)
 
-	quiz(browser, metamask)
-	balancer_trade(layer3_window, browser, metamask)
-	balancer_pool(layer3_window, browser, metamask)
-	complete(browser, layer3_window)
+	if completed_count < 1:
+		quiz(browser, metamask)
+	if completed_count < 2:
+		balancer_trade(layer3_window, browser, metamask)
+	if completed_count < 3:
+		balancer_pool(layer3_window, browser, metamask)
+	
+	if not is_quest_completed(browser):
+		complete(browser, layer3_window)
