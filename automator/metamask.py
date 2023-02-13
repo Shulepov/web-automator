@@ -47,6 +47,8 @@ class Metamask:
 		try:
 			self.browser.click("Got it")
 			sleep(1)
+			self.driver.find_element(By.XPATH, '//button[contains(text(),"Try it")]')
+			sleep(1)
 		except:
 			print("")
 		self.get_wallet_address()
