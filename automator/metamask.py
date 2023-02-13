@@ -44,13 +44,19 @@ class Metamask:
 		login_button = self.driver.find_element(By.XPATH, '//button[@data-testid="unlock-submit"]')
 		login_button.click()
 		sleep(5)
+		
 		try:
 			self.browser.click("Got it")
 			sleep(1)
-			self.driver.find_element(By.XPATH, '//button[contains(text(),"Try it")]')
+		except:
+			print("")
+		
+		try:
+			self.driver.find_element(By.XPATH, '//button[@data-testid="popover-close"]').click()
 			sleep(1)
 		except:
 			print("")
+						
 		self.get_wallet_address()
 		sleep(1)
 		self.get_back()
