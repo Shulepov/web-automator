@@ -25,6 +25,13 @@ class Uniswap:
         except Exception as e:
             print("Looks like wallet already connected to uniswap")
 
+    def check_price_updated(self):
+        try:
+            self.browser.driver.find_element(By.XPATH, '//button[text()="Accept"]').click()
+            sleep(0.5)
+        except:
+            return
+
     def execute_swap(self, amount):
         #setup slippage
         settings_btn = self.browser.driver.find_element(By.ID, 'open-settings-dialog-button')
@@ -39,8 +46,8 @@ class Uniswap:
         sleep(7)
         self.browser.driver.find_element(By.ID, 'swap-button').click()
         sleep(2)
+        self.check_price_updated()
         self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
-        sleep(10)
         self.metamask.confirm_transaction()
 
     def wrap_eth(self, weth_addr, amount):
@@ -52,7 +59,6 @@ class Uniswap:
         self.browser.type(amount, classname="token-amount-input")
         sleep(7)
         self.browser.driver.find_element(By.XPATH, '//button[text()="Wrap"]').click()
-        sleep(5)
         self.metamask.confirm_transaction()
         self.browser.close_current_tab()
         self.browser.switch_to_window(prev_window)

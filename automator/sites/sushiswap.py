@@ -16,6 +16,13 @@ class Sushiswap:
         except Exception as e:
             print("Looks like wallet already connected to sushi")
 
+    def check_price_updated(self):
+        try:
+            self.browser.driver.find_element(By.XPATH, '//button[text()="Accept"]').click()
+            sleep(0.5)
+        except:
+            return
+
     def execute_swap(self, amount):
         url = self.browser.get_current_url()
         url += "&exactAmount=" + amount
@@ -26,10 +33,11 @@ class Sushiswap:
              self.metamask.confirm_token_approval(float(amount) * 5)
         except:
             print("Looks like token already approved")
+
         self.browser.driver.find_element(By.ID, 'swap-button').click()
-        sleep(5)
+        sleep(3)
+        self.check_price_updated()
         self.browser.driver.find_element(By.ID, 'confirm-swap-or-send').click()
-        sleep(10)
         self.metamask.confirm_transaction()
 
 
