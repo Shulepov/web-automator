@@ -39,8 +39,8 @@ def is_quest_completed(browser):
 
 def completed_tasks_count(browser):
 	try:
-		#count of elements before not completed task
-		completed = browser.driver.find_elements(By.XPATH, '//div[contains(@class,"c-PJLV-icSBVGD-css")]/preceding-sibling::div')
+		uncompleted = browser.driver.find_element(By.XPATH, '//div[contains(@class,"c-PJLV-icSBVGD-css")]')
+		completed = uncompleted.find_elements(By.XPATH, '/preceding-sibling::div')
 		return len(completed)
 	except:
 		#if all completed
