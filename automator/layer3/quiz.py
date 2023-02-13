@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from time import sleep
 
 #answers example [1, 2, 3, 1, 2, 5]
 def do_quiz(browser, answers):
