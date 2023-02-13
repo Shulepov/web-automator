@@ -1,13 +1,9 @@
 from time import sleep
-
 from selenium import webdriver
-from selenium.common import StaleElementReferenceException
-from selenium.webdriver.common.by import By
-from automator import Browser
-from automator import Metamask
+from automator import Browser, Metamask
+from automator.sites import Twitter
 import json
-
-from automator.layer3 import Gm,ArbinautTravel,StEthArbitrum,ArbitrumAllRounder2
+from automator.layer3 import Gm,ArbinautTravel,StEthArbitrum,ArbitrumAllRounder2,ArbinautTravel2
 
 def get_driver(cdir, profile):
     o = webdriver.ChromeOptions()
@@ -25,18 +21,24 @@ if __name__ == '__main__':
     f.close() 
 
     for profile in config['chrome_profiles']:
-        chrome = get_driver(config['chrome_dir'], profile)
+       print(f'Start profile: {profile}')
+       chrome = get_driver(config['chrome_dir'], profile)
     
-        mmask = Metamask(chrome.driver, chrome)
-        mmask.login(config['metamask'])
+       mmask = Metamask(chrome.driver, chrome)
+       mmask.login(config['metamask'])
     
-        Gm.run(chrome, mmask)
-        ArbinautTravel.run(chrome, mmask)
-        #StEthArbitrum.run(chrome, mmask)
-        #ArbitrumAllRounder2.run(chrome, mmask)
+       #Gm.run(chrome, mmask)
+       #ArbinautTravel.run(chrome, mmask)
+       #ArbinautTravel2.run(chrome, mmask)
+       #StEthArbitrum.run(chrome, mmask)
+       #ArbitrumAllRounder2.run(chrome, mmask)
 
-        sleep(30)
-        chrome.driver.quit()
+       #twitter = Twitter(chrome)
+       #twitter.follow("lensterxyz")
+       #twitter.like_retweet("https://twitter.com/lensterxyz/status/1511019289394184192")
+
+       sleep(30)
+       chrome.driver.quit()
 
     while True:
-        sleep(100)
+       sleep(100)

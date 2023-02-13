@@ -4,3 +4,4 @@ from .balancer import Balancer
 from .gmx import Gmx
 from .hop import Hop
 from .twitter import Twitter
+from .discord import Discord
