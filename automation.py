@@ -36,7 +36,7 @@ if __name__ == '__main__':
         #ArbitrumAllRounder2.run(chrome, mmask)
 
         sleep(30)
-        #chrome.driver.quit()
+        chrome.driver.quit()
 
     while True:
         sleep(100)
