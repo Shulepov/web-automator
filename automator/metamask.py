@@ -73,11 +73,9 @@ class Metamask:
 	def get_wallet_address(self):
 		if self.wallet_address:
 			return self.wallet_address
-		self.open_metamask()
 		root = tk.Tk()
 		self.driver.find_element(By.XPATH, '//button[@data-testid="selected-account-click"]').click()
 		self.wallet_address = root.clipboard_get()
-		self.get_back()
 		return self.wallet_address
 
 
